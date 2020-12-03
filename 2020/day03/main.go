@@ -22,23 +22,25 @@ func main() {
 	} else {
 		filename = "input.txt"
 	}
+
 	input_file, err := readLines(filename)
 	check(err)
 
 	// Your Code goes below!
-	resultPart1 := part1(input_file, 3, 1)
+	part1Slope := Slope{3, 1}
+	resultPart1 := part1(input_file, part1Slope)
 	fmt.Printf("Part 1 Result: %d\n", resultPart1)
 
 	resultPart2 := part2(input_file)
 	fmt.Printf("Part 2 Result: %d\n", resultPart2)
 }
 
-func part1(lines []string, right int, down int) (numTrees int) {
+func part1(lines []string, slope Slope) (numTrees int) {
 	currentPosition := 0
 	width := len(lines[0])
 
-	for i := down; i < len(lines); i += down {
-		currentPosition = (currentPosition + right) % width
+	for i := slope.Down; i < len(lines); i += slope.Down {
+		currentPosition = (currentPosition + slope.Right) % width
 		if string(lines[i][currentPosition]) == "#" {
 			numTrees++
 		}
@@ -56,14 +58,13 @@ func part2(lines []string) (totalTrees int) {
 		{1, 2},
 	}
 
+	// Explicitly set it to 1 because the named return is 0 by default and multiplying by 0 is 0
 	totalTrees = 1
-	for i, slope := range checkSlopes {
-		slopeTrees := part1(lines, slope.Right, slope.Down)
-		fmt.Printf("slope %d (%d r, %d d): %d\n", i, slope.Right, slope.Down, slopeTrees)
-		totalTrees *= part1(lines, slope.Right, slope.Down)
+	for _, slope := range checkSlopes {
+		totalTrees *= part1(lines, slope)
 	}
 
-	return totalTrees
+	return
 }
 
 func check(e error) {
