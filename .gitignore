@@ -1,1 +1,11 @@
+# Ignore All
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+# Ignore Idea configuration files
 .idea/
