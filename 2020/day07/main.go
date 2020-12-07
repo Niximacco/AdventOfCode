@@ -61,7 +61,6 @@ func part2(bagContainsInfo map[string]Bag) (numBags int) {
 func recursiveSearchHowManyBagsContained(bagContainsInfo map[string]Bag, color string) (count int) {
 	for bagType, num := range bagContainsInfo[color].Contains {
 		count += num + (num * recursiveSearchHowManyBagsContained(bagContainsInfo, bagType))
-		fmt.Printf("\t%s: %d (%d)\n", bagType, num, count)
 	}
 
 	return
