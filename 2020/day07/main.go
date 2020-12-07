@@ -59,10 +59,8 @@ func part2(bagContainsInfo map[string]Bag) (numBags int) {
 }
 
 func recursiveSearchHowManyBagsContained(bagContainsInfo map[string]Bag, color string) (count int) {
-	fmt.Printf("checking %s\n", color)
 	for bagType, num := range bagContainsInfo[color].Contains {
-		count += num
-		count += num * recursiveSearchHowManyBagsContained(bagContainsInfo, bagType)
+		count += num + (num * recursiveSearchHowManyBagsContained(bagContainsInfo, bagType))
 		fmt.Printf("\t%s: %d (%d)\n", bagType, num, count)
 	}
 
@@ -71,7 +69,6 @@ func recursiveSearchHowManyBagsContained(bagContainsInfo map[string]Bag, color s
 
 func recursiveSearchBagsEventuallyContaining(bagToBagsContaining map[string][]string, color string) (items map[string]bool) {
 	items = make(map[string]bool)
-	fmt.Printf("searching %s\n", color)
 	if _, present := bagToBagsContaining[color]; present {
 		for _, containingColor := range bagToBagsContaining[color] {
 			items[containingColor] = true
@@ -90,15 +87,13 @@ func parseRules(lines []string) (bags map[string]Bag) {
 		newBag := Bag{}
 		newBag.Contains = make(map[string]int)
 
-		reLineMatch := regexp.MustCompile("^(.+) bags contain (.+)$")
-		lineMatches := reLineMatch.FindStringSubmatch(line)
+		lineMatches := regexp.MustCompile("^(.+) bags contain (.+)$").FindStringSubmatch(line)
 		containsList := strings.Split(lineMatches[2], ",")
 		for _, item := range containsList {
 			if strings.Contains(item, "no other bags") {
 				continue
 			}
-			reContainsMatch := regexp.MustCompile("(\\d+) (.+) bag")
-			containsMatches := reContainsMatch.FindStringSubmatch(item)
+			containsMatches := regexp.MustCompile("(\\d+) (.+) bag").FindStringSubmatch(item)
 
 			count, _ := strconv.Atoi(containsMatches[1])
 			newBag.Contains[containsMatches[2]] = count
