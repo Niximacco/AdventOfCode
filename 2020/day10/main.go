@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -66,15 +67,24 @@ func part1(adapters map[int]bool) (result int) {
 
 func part2(adapters map[int]bool) (result int) {
 	maxJoltage := 0
+	ways := make(map[int]int)
+	var adapterNums []int
+
 	for k := range adapters {
+		adapterNums = append(adapterNums, k)
 		if k > maxJoltage {
 			maxJoltage = k
 		}
 	}
 
-	fmt.Printf("maxJoltage: %d\n", maxJoltage)
+	ways[0] = 1
+	sort.Ints(adapterNums)
+	for _, num := range adapterNums {
+		ways[num] = ways[num-1] + ways[num-2] + ways[num-3]
+	}
 
-	result = countUniqueCombos(adapters, 0, maxJoltage)
+	result = ways[adapterNums[len(adapterNums)-1]]
+
 	return
 }
 
