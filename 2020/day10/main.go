@@ -66,15 +66,11 @@ func part1(adapters map[int]bool) (result int) {
 }
 
 func part2(adapters map[int]bool) (result int) {
-	maxJoltage := 0
 	ways := make(map[int]int)
 	var adapterNums []int
 
 	for k := range adapters {
 		adapterNums = append(adapterNums, k)
-		if k > maxJoltage {
-			maxJoltage = k
-		}
 	}
 
 	ways[0] = 1
@@ -85,28 +81,6 @@ func part2(adapters map[int]bool) (result int) {
 
 	result = ways[adapterNums[len(adapterNums)-1]]
 
-	return
-}
-
-func countUniqueCombos(adapters map[int]bool, currentJoltage int, maxJoltage int) (numCombos int) {
-	childAdapters := make(map[int]bool)
-	for k := range adapters {
-		if k != currentJoltage && k >= currentJoltage {
-			childAdapters[k] = false
-		}
-	}
-
-	for i := 1; i <= 3; i++ {
-		if currentJoltage+i == maxJoltage {
-			numCombos++
-		}
-
-		if used, present := adapters[currentJoltage+i]; present && !used {
-			numCombos += countUniqueCombos(childAdapters, currentJoltage+i, maxJoltage)
-		}
-	}
-
-	fmt.Printf("%d: %d\n", len(adapters), numCombos)
 	return
 }
 
