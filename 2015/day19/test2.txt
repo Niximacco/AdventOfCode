@@ -1,0 +1,58 @@
+Al => ThF
+      ThF
+Al => ThRnFAr
+      Th(F)
+B => BCa
+     BCa
+B => TiB
+     TiB
+B => TiRnFAr
+     Ti(F)
+Ca => CaCa
+     CaCa
+Ca => PB
+     PB
+Ca => PRnFAr
+     P(F)
+Ca => SiRnFYFAr
+     Si(F,F)
+Ca => SiRnMgAr
+     Si(Mg)
+Ca => SiTh
+     SiTh
+F => CaF
+     CaF
+F => PMg
+     PMg
+F => SiAl
+H => CRnAlAr
+H => CRnFYFYFAr
+H => CRnFYMgAr
+H => CRnMgYFAr
+H => HCa
+H => NRnFYFAr
+H => NRnMgAr
+H => NTh
+H => OB
+H => ORnFAr
+Mg => BF
+Mg => TiMg
+N => CRnFAr
+N => HSi
+O => CRnFYFAr
+O => CRnMgAr
+O => HP
+O => NRnFAr
+O => OTi
+P => CaP
+P => PTi
+P => SiRnFAr
+Si => CaSi
+Th => ThCa
+Ti => BP
+Ti => TiTi
+e => HF
+e => NAl
+e => OMg
+
+CRnCaSiRnBSiRnFArTiBPTiTiBFArPBCaSiThSiRnTiBPBPMgArCaSiRnTiMgArCaSiThCaSiRnFArRnSiRnFArTiTiBFArCaCaSiRnSiThCaCaSiRnMgArFYSiRnFYCaFArSiThCaSiThPBPTiMgArCaPRnSiAlArPBCaCaSiRnFYSiThCaRnFArArCaCaSiRnPBSiRnFArMgYCaCaCaCaSiThCaCaSiAlArCaCaSiRnPBSiAlArBCaCaCaCaSiThCaPBSiThPBPBCaSiRnFYFArSiThCaSiRnFArBCaCaSiRnFYFArSiThCaPBSiThCaSiRnPMgArRnFArPTiBCaPRnFArCaCaCaCaSiRnCaCaSiRnFYFArFArBCaSiThFArThSiThSiRnTiRnPMgArFArCaSiThCaPBCaSiRnBFArCaCaPRnCaCaPMgArSiRnFYFArCaSiThRnPBPMgAr
