@@ -9,3 +9,6 @@
 
 # Ignore Idea configuration files
 .idea/
+
+**/input.txt
+**/input-test.txt
