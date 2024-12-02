@@ -1,13 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
-	"os"
-	"regexp"
+	utils "github.com/niximacco/aocutils"
 	"sort"
-	"strconv"
 )
 
 func main() {
@@ -20,19 +17,13 @@ func main() {
 	} else {
 		filename = "input.txt"
 	}
-	input_file, err := readLines(filename)
-	check(err)
+	input_file, err := utils.ReadLines(filename)
+	utils.Check(err)
 
 	// Your Code goes below!
 	part1, part2 := 0, 0
 	for _, line := range input_file {
-		re := regexp.MustCompile("[0-9]+")
-		strings := re.FindAllString(line, -1)
-		var ints []int
-		for _, stringint := range strings {
-			val, _ := strconv.Atoi(stringint)
-			ints = append(ints, val)
-		}
+		ints := utils.GetAllIntegersFromString(line)
 		safe := isSafe(ints)
 		if safe {
 			part1++
@@ -67,7 +58,7 @@ func isSafe(inputs []int) bool {
 	last := -1
 	for _, num := range inputs {
 		if last != -1 {
-			diff := absDiffInt(last, num)
+			diff := utils.AbsDiffInt(last, num)
 			if diff < 1 || diff > 3 {
 				return false
 			}
@@ -90,34 +81,6 @@ func isSafe(inputs []int) bool {
 	})
 
 	return sortedDesc
-}
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func readLines(path string) ([]string, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines, scanner.Err()
-}
-
-func absDiffInt(x, y int) int {
-	if x < y {
-		return y - x
-	}
-	return x - y
 }
 
 func remove(slice []int, s int) []int {
