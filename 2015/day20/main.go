@@ -68,7 +68,7 @@ func main() {
 				}
 			}
 		}
-		if result > 25000000 {
+		if result > 25000000 || part2%25000 == 0 {
 			fmt.Printf("%d: %d\n", part2, result)
 		}
 	}
