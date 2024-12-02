@@ -1,10 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
-	"os"
+	utils "github.com/niximacco/aocutils"
 	"sort"
 	"strconv"
 	"strings"
@@ -20,8 +19,8 @@ func main() {
 	} else {
 		filename = "input.txt"
 	}
-	input_file, err := readLines(filename)
-	check(err)
+	input_file, err := utils.ReadLines(filename)
+	utils.Check(err)
 
 	// Your Code goes below!
 	part1, part2 := 0, 0
@@ -44,7 +43,7 @@ func main() {
 	frequency := make(map[int]int)
 
 	for i := 0; i < len(line_parts_left); i++ {
-		diff := absDiffInt(line_parts_left[i], line_parts_right[i])
+		diff := utils.AbsDiffInt(line_parts_left[i], line_parts_right[i])
 		part1 += diff
 		frequency[line_parts_right[i]] = frequency[line_parts_right[i]] + 1
 	}
@@ -56,32 +55,4 @@ func main() {
 
 	fmt.Printf("Part1: %v\n", part1)
 	fmt.Printf("Part2: %v\n", part2)
-}
-
-func absDiffInt(x, y int) int {
-	if x < y {
-		return y - x
-	}
-	return x - y
-}
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func readLines(path string) ([]string, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines, scanner.Err()
 }
